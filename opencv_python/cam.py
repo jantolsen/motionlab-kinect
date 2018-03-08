@@ -83,7 +83,12 @@ while True:
         # Tracking success
         p1 = (int(bbox[0]), int(bbox[1]))
         p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
-        cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1)
+        # cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1)
+
+
+        c = (int(bbox[0] + d/2), int(bbox[1] + d/2))
+        r = int(d/2)
+        cv2.circle(frame, c, r, (255,0,0), 2, 1)
     else :
         # Tracking failure
         cv2.putText(frame, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
