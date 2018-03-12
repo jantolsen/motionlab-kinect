@@ -33,18 +33,20 @@ class KinectV2(object):
 kinect = KinectV2()
 print('hello world')
 print(kinect)
-
 while True:
     frame = kinect.take_pic()
     color = cv2.resize( frame[0], (1280, 720))
 
-    cv2.imshow('test', color)
+    # cv2.imshow('test', color)
 
-    # cv2.imshow('color', frame[0])
-    # cv2.imshow('depth', frame[1])
-    # cv2.imshow('body', frame[2])
+    cv2.imshow('color', frame[0])
+    cv2.imshow('depth', frame[1])
+    cv2.imshow('body', frame[2])
     cv2.imshow('infra', frame[3])
     
+    t = frame[1]*0.1
+    # t = frame[1]
+    cv2.imshow('test',t)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         cv2.destroyAllWindows()
         kinect.close()
