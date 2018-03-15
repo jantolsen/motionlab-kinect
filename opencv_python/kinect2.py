@@ -10,7 +10,25 @@ class KinectV2(object):
                                                 PyKinectV2.FrameSourceTypes_BodyIndex |
                                                 PyKinectV2.FrameSourceTypes_Depth |
                                                 PyKinectV2.FrameSourceTypes_Infrared)
+        self.rgb_Fx = 1081.37
+        self.rgb_Fy = 1081.37
+        self.rgb_Cx = 959.5
+        self.rgb_Cy = 539.5
 
+        
+
+        self.depth_Fx = 366.193
+        self.depth_Fy = 366.193
+        self.depth_Cx = 256.684
+        self.depth_Cy = 207.085
+        self.depth_k1 = 0.0905474
+        self.depth_k2 = -0.26819
+        self.depth_k3 = 0.0950862
+        self.depth_p1 = 0.0
+        self.depth_p2 = 0.0
+
+        self.ir_img_size = (424,512)
+        self.rgb_img_size = (1080,1920)
     def close(self):
         self.kinect.close()
 
@@ -23,9 +41,9 @@ class KinectV2(object):
 
         # reshape to 2-D space
         colorFrame = colorFrame.reshape(1080,1920,4)
-        depthFrame = depthFrame.reshape(424,512)
-        bodyIndexFrame = bodyIndexFrame.reshape(424,512)
-        infraredFrame = infraredFrame.reshape(424,512)
+        depthFrame = depthFrame.reshape(self.ir_img_size)
+        bodyIndexFrame = bodyIndexFrame.reshape(self.ir_img_size)
+        infraredFrame = infraredFrame.reshape(self.ir_img_size)
 
         return (colorFrame, depthFrame, bodyIndexFrame, infraredFrame)
 
@@ -45,6 +63,8 @@ def main():
         ir_frame = frame[3]
 
         cv2.imshow('color', color_frame)
+        # cv2.imshow('depth', depth_frame)
+        cv2.imshow('IR', ir_frame)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             cv2.destroyAllWindows()

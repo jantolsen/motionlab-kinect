@@ -29,5 +29,8 @@ import numpy as np
 # print(a[1:4])
 
 a = np.array(([11, 11, 10]))
-b[a != 11] = 
+b = [[1,2,3],[11,22,33],[5,6,7]]
+print(b)
+c = b[0][0]
+print(c)
 
